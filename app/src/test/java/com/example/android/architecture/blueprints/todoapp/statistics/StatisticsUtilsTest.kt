@@ -19,8 +19,11 @@ class StatisticsUtilsTest {
     }
     @Test
     fun getActiveAndCompletedStats_noCompleted_returnsHundredZero(){
+        // GIVEN
         val tasks = listOf<Task>(Task("title1","Description1",false))
+        // WHEN
         val result = getActiveAndCompletedStats(tasks)
+        // THEN
         assertEquals(0f,result.completedTasksPercent)
         assertEquals(100f,result.activeTasksPercent)
     }
