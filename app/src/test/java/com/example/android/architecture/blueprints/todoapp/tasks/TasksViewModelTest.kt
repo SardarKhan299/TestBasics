@@ -7,6 +7,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.Event
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
+import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.core.IsNull.nullValue
 import org.junit.Assert.*
@@ -31,4 +32,15 @@ class TasksViewModelTest{
 
             assertThat(value?.getContentIfNotHandled(),(not(nullValue())))
     }
+
+    @Test
+    fun setFilterAllTasks_tasksAddViewVisible(){
+        val taskViewModel =  TasksViewModel(ApplicationProvider.getApplicationContext())
+        taskViewModel.setFiltering(TasksFilterType.ALL_TASKS)
+        val value = taskViewModel.tasksAddViewVisible.getOrAwaitValue()
+
+        assertThat(value,`is`(true))
+
+    }
+
 }
