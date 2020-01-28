@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.Event
+import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.core.IsNull.nullValue
 import org.junit.Assert.*
@@ -24,20 +25,10 @@ class TasksViewModelTest{
         // Given a fresh TasksViewModel
        val taskViewModel =  TasksViewModel(ApplicationProvider.getApplicationContext())
 
-        val observer = Observer<Event<Unit>>{}
-        try {
-            // Then the new task event is triggered]
-            taskViewModel.newTaskEvent.observeForever(observer)
-
             taskViewModel.addNewTask()
-
-            val value = taskViewModel.newTaskEvent.value
+            // Then the new task event is triggered
+            val value = taskViewModel.newTaskEvent.getOrAwaitValue()
 
             assertThat(value?.getContentIfNotHandled(),(not(nullValue())))
-        }catch (e:Exception){
-
-        }finally {
-            taskViewModel.newTaskEvent.removeObserver(observer)
-        }
     }
 }
