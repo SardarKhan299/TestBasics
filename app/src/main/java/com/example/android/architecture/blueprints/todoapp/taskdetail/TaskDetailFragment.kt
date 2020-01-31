@@ -30,6 +30,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.architecture.blueprints.todoapp.EventObserver
 import com.example.android.architecture.blueprints.todoapp.R
+import com.example.android.architecture.blueprints.todoapp.TodoApplication
 import com.example.android.architecture.blueprints.todoapp.data.source.DefaultTasksRepository
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository
 import com.example.android.architecture.blueprints.todoapp.databinding.TaskdetailFragBinding
@@ -47,7 +48,7 @@ class TaskDetailFragment : Fragment() {
 
     private val args: TaskDetailFragmentArgs by navArgs()
     private val viewModel by viewModels<TaskDetailViewModel> {
-        TasksDetailViewModelFactory(DefaultTasksRepository.getRepository(requireActivity().application))
+        TasksDetailViewModelFactory((requireActivity().application as TodoApplication).tasksRepository)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
