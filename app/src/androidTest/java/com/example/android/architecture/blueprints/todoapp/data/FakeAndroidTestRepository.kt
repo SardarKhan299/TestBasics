@@ -15,7 +15,7 @@ class FakeAndroidTestRepository:TasksRepository {
     }
 
     override suspend fun refreshTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun observeTasks(): LiveData<Result<List<Task>>> {
